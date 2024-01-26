@@ -23,13 +23,13 @@ class PostLocalDataSourceImpl extends PostLocalDataSource{
     //todo <Map<String,dynamic>>
       ((postModel) =>postModel.toJson())
         .toList();
-    sp.setString("key", json.encode(jsonList));
+    sp.setString("posts_key", json.encode(jsonList));
     return Future.value(unit);
   }
 
   @override
   Future<List<PostModel>> getCachedPosts() {
-    final jsonString = sp.getString("key");
+    final jsonString = sp.getString("posts_key");
     if(jsonString!=null){
       List decodeJsonData = json.decode(jsonString);
       List<PostModel> jsonToPostModels = decodeJsonData
