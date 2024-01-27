@@ -11,7 +11,7 @@ class GetAllPosts{
   GetAllPosts(this.repo);
 
 
-  Future<Either<Failure,List<Post>>> invoke()async{
+  Future<Either<Failure,List<Post>>> invoke() async{
     return await repo.getAllPosts();
   }
 }
