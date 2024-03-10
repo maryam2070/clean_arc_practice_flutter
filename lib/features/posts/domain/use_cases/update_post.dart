@@ -8,7 +8,7 @@ import '../models/post.dart';
 class UpdatePost{
   final PostsRepository repo;
 
-  UpdatePost(this.repo);
+  UpdatePost({required this.repo});
 
 
   Future<Either<Failure, Unit>> invoke(Post post)async{

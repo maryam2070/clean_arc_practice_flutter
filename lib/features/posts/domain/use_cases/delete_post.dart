@@ -8,7 +8,7 @@ import '../models/post.dart';
 class DeletePost{
   final PostsRepository repo;
 
-  DeletePost(this.repo);
+  DeletePost({required this.repo});
 
 
   Future<Either<Failure, Unit>> invoke(int id)async{

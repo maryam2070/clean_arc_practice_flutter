@@ -12,7 +12,7 @@ abstract class PostLocalDataSource{
 }
 
 class PostLocalDataSourceImpl extends PostLocalDataSource{
-  SharedPreferences sp;
+  Future<SharedPreferences> sp;
 
   PostLocalDataSourceImpl({required this.sp});
 
@@ -23,13 +23,17 @@ class PostLocalDataSourceImpl extends PostLocalDataSource{
     //todo <Map<String,dynamic>>
       ((postModel) =>postModel.toJson())
         .toList();
-    sp.setString("posts_key", json.encode(jsonList));
+    sp.then((sp) =>
+    sp.setString("posts_key", json.encode(jsonList)) );
     return Future.value(unit);
   }
 
   @override
   Future<List<PostModel>> getCachedPosts() {
-    final jsonString = sp.getString("posts_key");
+    var jsonString ="";
+    sp.then((sp) => jsonString = sp.getString("posts_key")! );
+
+
     if(jsonString!=null){
       List decodeJsonData = json.decode(jsonString);
       List<PostModel> jsonToPostModels = decodeJsonData

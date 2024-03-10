@@ -8,8 +8,7 @@ import '../models/post.dart';
 class GetAllPosts{
   final PostsRepository repo;
 
-  GetAllPosts(this.repo);
-
+  GetAllPosts({required this.repo});
 
   Future<Either<Failure,List<Post>>> invoke() async{
     return await repo.getAllPosts();

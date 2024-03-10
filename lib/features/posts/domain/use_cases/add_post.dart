@@ -8,7 +8,7 @@ import '../models/post.dart';
 class AddPost{
   final PostsRepository repo;
 
-  AddPost(this.repo);
+  AddPost({required this.repo});
 
 
   Future<Either<Failure, Unit>> invoke(Post post)async{

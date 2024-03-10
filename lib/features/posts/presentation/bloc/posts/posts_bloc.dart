@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:clean_arc_practice/core/error/failures.dart';
 import 'package:equatable/equatable.dart';
@@ -20,11 +19,11 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       if (event is GetPosts || event is RefreshPosts) {
         emit(PostsLoading());
         final failureOrPosts = await getAllPosts.invoke();
-
-        failureOrPosts.fold((failure) => emit(PostsError(_getMessage(failure))), (posts) =>
-            emit(LoadedPostsState(
-              posts: posts,
-            )));
+        failureOrPosts.fold(
+            (failure) => emit(PostsError(_getMessage(failure))),
+            (posts) => emit(LoadedPostsState(
+                  posts: posts,
+                )));
       }
     });
   }

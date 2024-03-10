@@ -29,6 +29,22 @@ class OperationsBloc extends Bloc<OperationsEvent, OperationsState> {
             emit(ErrorState(message: _mapFailureToMessage(failure))), (
             success) => emit(MessageState(message: ADD_SUCCESS_MESSAGE)));
       }
+
+      if (event is UpdatePostEvent) {
+        emit(LoadingState());
+        final response = await updatePost.invoke(event.post);
+        response.fold((failure) =>
+            emit(ErrorState(message: _mapFailureToMessage(failure))), (
+            success) => emit(MessageState(message: UPDATE_SUCCESS_MESSAGE)));
+      }
+
+      if (event is DeletePostEvent) {
+        emit(LoadingState());
+        final response = await deletePost.invoke(event.postId);
+        response.fold((failure) =>
+            emit(ErrorState(message: _mapFailureToMessage(failure))), (
+            success) => emit(MessageState(message: DELETE_SUCCESS_MESSAGE)));
+      }
     });
   }
 
